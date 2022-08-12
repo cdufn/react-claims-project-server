@@ -10,9 +10,10 @@ import java.util.Optional;
 @Repository
 public interface ClaimControllerRepository extends JpaRepository<ClaimTransaction, Integer> {
 
-    // also add in entries for find by policy number and find by last name
     public List<ClaimTransaction> findAllByNewClaim(String claimStatus);
     public List<ClaimTransaction> findAllForClaimId(String claimId);
-    public Optional<ClaimTransaction> findByPolicyNumber(Integer policyNumber);
+
+    public List<ClaimTransaction> findAllByPolicyNumber(String policyNumber);
+    public List<ClaimTransaction> findAllByLastName(String lastName);
 
 }

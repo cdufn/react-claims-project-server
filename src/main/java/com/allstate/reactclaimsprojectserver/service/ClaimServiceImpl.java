@@ -39,6 +39,16 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
     @Override
+    public List<ClaimTransaction> getClaimByPolicyNumber(String policyNumber) {
+        return claimControllerRepository.findAllByPolicyNumber(policyNumber);
+    }
+
+    @Override
+    public List<ClaimTransaction> getClaimByLastname(String lastName) {
+        return claimControllerRepository.findAllByLastName(lastName);
+    }
+
+    @Override
     public List<ClaimTransaction> getAllTransactionsForClaimId(String claimId) {
         return claimControllerRepository.findAllForClaimId(claimId);
     }
@@ -53,7 +63,7 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
     @Override
-    public ClaimTransaction add(ClaimControllerDTO claimDTO) {
+    public ClaimTransaction addClaim(ClaimControllerDTO claimDTO) {
         ClaimTransaction claim = claimDTO.toClaimTransaction();
 
         if(claim.getClaimId() == null) {
@@ -70,11 +80,24 @@ public class ClaimServiceImpl implements ClaimService {
     @Override
     public ClaimTransaction updateClaim(Integer id, Map<String, String> data) {
         ClaimTransaction claim = getClaimById(id);
-        if (data.containsKey("policyNumber")) claim.setPolicyNumber(Integer.parseInt(data.get("policyNumber")));
+        if (data.containsKey("policyNumber")) claim.setPolicyNumber(data.get("policyNumber"));
         if (data.containsKey("firstName")) claim.setFirstName(data.get("firstName"));
         if (data.containsKey("lastName")) claim.setLastName(data.get("lastName"));
         if (data.containsKey("claimType")) claim.setClaimType(data.get("claimType"));
         if (data.containsKey("claimStatus")) claim.setClaimStatus(data.get("claimStatus"));
+        if (data.containsKey("claimDate")) claim.setPolicyNumber(data.get("claimDate"));
+        if (data.containsKey("costOfClaim")) claim.setFirstName(data.get("costOfClaim"));
+        if (data.containsKey("claimReason")) claim.setLastName(data.get("claimReason"));
+        if (data.containsKey("description")) claim.setClaimType(data.get("city"));
+        if (data.containsKey("street")) claim.setClaimStatus(data.get("street"));
+        if (data.containsKey("zip")) claim.setLastName(data.get("zip"));
+        if (data.containsKey("makeOfVehicle")) claim.setClaimType(data.get("makeOfVehicle"));
+        if (data.containsKey("modelOfVehicle")) claim.setClaimStatus(data.get("modelOfVehicle"));
+        if (data.containsKey("yearOfVehicle;")) claim.setClaimType(data.get("yearOfVehicle;"));
+        if (data.containsKey("petType")) claim.setClaimStatus(data.get("petType"));
+        if (data.containsKey("petBreed")) claim.setLastName(data.get("petBreed"));
+        if (data.containsKey("dateOfEvent")) claim.setClaimType(data.get("dateOfEvent"));
+        if (data.containsKey("eventDetails")) claim.setClaimStatus(data.get("eventDetails"));
         return claimControllerRepository.save(claim);
     }
 }
