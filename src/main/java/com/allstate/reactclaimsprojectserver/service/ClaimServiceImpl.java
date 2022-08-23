@@ -1,6 +1,6 @@
 package com.allstate.reactclaimsprojectserver.service;
 
-import com.allstate.reactclaimsprojectserver.data.ClaimControllerRepository;
+import com.allstate.reactclaimsprojectserver.data.ClaimRepository;
 import com.allstate.reactclaimsprojectserver.domain.ClaimTransaction;
 import com.allstate.reactclaimsprojectserver.dtos.ClaimControllerDTO;
 import com.allstate.reactclaimsprojectserver.exceptions.InvalidNewTransactionException;
@@ -16,16 +16,16 @@ import java.util.Optional;
 public class ClaimServiceImpl implements ClaimService {
 
     @Autowired
-    private ClaimControllerRepository claimControllerRepository;
+    private ClaimRepository ClaimRepository;
 
     @Override
     public List<ClaimTransaction> getAllTransactions() {
-        return claimControllerRepository.findAll();
+        return ClaimRepository.findAll();
     }
 
     @Override
     public int countTransactions() {
-        return claimControllerRepository.findAll().size();
+        return ClaimRepository.findAll().size();
     }
 
     @Override
@@ -35,27 +35,27 @@ public class ClaimServiceImpl implements ClaimService {
 //                .stream().filter( trans -> trans.getCountry().equals(country))
 //                .collect(Collectors.toList());
 
-        return claimControllerRepository.findAllByNewClaim(claimStatus);
-    }
-
-    @Override
-    public List<ClaimTransaction> getClaimByPolicyNumber(String policyNumber) {
-        return claimControllerRepository.findAllByPolicyNumber(policyNumber);
-    }
-
-    @Override
-    public List<ClaimTransaction> getClaimByLastname(String lastName) {
-        return claimControllerRepository.findAllByLastName(lastName);
+        return ClaimRepository.findAllByNewClaim(claimStatus);
     }
 
     @Override
     public List<ClaimTransaction> getAllTransactionsForClaimId(String claimId) {
-        return claimControllerRepository.findAllForClaimId(claimId);
+        return ClaimRepository.findAllForClaimId(claimId);
+    }
+
+    @Override
+    public List<ClaimTransaction> getClaimByPolicyNumber(String policyNumber) {
+        return ClaimRepository.findAllByPolicyNumber(policyNumber);
+    }
+
+    @Override
+    public List<ClaimTransaction> getClaimByLastname(String lastName) {
+        return ClaimRepository.findAllByLastName(lastName);
     }
 
     @Override
     public ClaimTransaction getClaimById(Integer id) {
-        Optional<ClaimTransaction> optionalCCT =  claimControllerRepository.findById(id);
+        Optional<ClaimTransaction> optionalCCT =  ClaimRepository.findById(id);
         if (optionalCCT.isPresent()) {
             return optionalCCT.get();
         }
@@ -70,7 +70,7 @@ public class ClaimServiceImpl implements ClaimService {
             throw new InvalidNewTransactionException("Claim Id must be provided");
         }
         try {
-            return claimControllerRepository.save(claim);
+            return ClaimRepository.save(claim);
         }
         catch (Exception e) {
             throw new InvalidNewTransactionException("We were unable to save your transaction");
@@ -98,6 +98,6 @@ public class ClaimServiceImpl implements ClaimService {
         if (data.containsKey("petBreed")) claim.setLastName(data.get("petBreed"));
         if (data.containsKey("dateOfEvent")) claim.setClaimType(data.get("dateOfEvent"));
         if (data.containsKey("eventDetails")) claim.setClaimStatus(data.get("eventDetails"));
-        return claimControllerRepository.save(claim);
+        return ClaimRepository.save(claim);
     }
 }

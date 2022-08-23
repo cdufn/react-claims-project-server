@@ -17,13 +17,13 @@ import java.util.Map;
 
 public class ClaimController {
 
+
     ClaimService claimService;
 
     @Autowired
     public void setClaimService(ClaimService claimService) {
         this.claimService = claimService;
     }
-
 
     @GetMapping()
     public List<ClaimTransaction> getAll(@RequestParam(value="policyNumber", required=false) String policyNumber,

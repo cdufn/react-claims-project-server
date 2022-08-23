@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ClaimControllerRepository extends JpaRepository<ClaimTransaction, Integer> {
+public interface ClaimRepository extends JpaRepository<ClaimTransaction, Integer> {
 
     public List<ClaimTransaction> findAllByNewClaim(String claimStatus);
     public List<ClaimTransaction> findAllForClaimId(String claimId);
-
     public List<ClaimTransaction> findAllByPolicyNumber(String policyNumber);
     public List<ClaimTransaction> findAllByLastName(String lastName);
 
