@@ -10,9 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ClaimRepository extends JpaRepository<ClaimTransaction, Integer> {
 
-    public List<ClaimTransaction> findAllByNewClaim(String claimStatus);
-    public List<ClaimTransaction> findAllForClaimId(String claimId);
+    public List<ClaimTransaction> findByClaimStatus(String claimStatus);
     public List<ClaimTransaction> findAllByPolicyNumber(String policyNumber);
     public List<ClaimTransaction> findAllByLastName(String lastName);
-
 }

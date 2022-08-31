@@ -8,13 +8,12 @@ import java.util.Map;
 
 public interface ClaimService {
 
+    List<ClaimTransaction> getAll();
     List<ClaimTransaction> getAllTransactions();
     int countTransactions();
-    List<ClaimTransaction> getAllNewClaims(String claimStatus);
-    List<ClaimTransaction> getAllTransactionsForClaimId(String claimId);
-    List<ClaimTransaction> getClaimByPolicyNumber(String policyNumber);
-    List<ClaimTransaction> getClaimByLastname(String lastName);
-    ClaimTransaction getClaimById(Integer id);
-    ClaimTransaction addClaim(ClaimControllerDTO claim);
+    List<ClaimTransaction> findByClaimStatus(String claimStatus);
+
+    ClaimTransaction getTransactionById(Integer id);
+    ClaimTransaction add(ClaimControllerDTO claim);
     ClaimTransaction updateClaim(Integer id, Map<String,String> data);
 }

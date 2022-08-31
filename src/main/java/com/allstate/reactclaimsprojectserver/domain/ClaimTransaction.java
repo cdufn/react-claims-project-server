@@ -3,6 +3,7 @@ package com.allstate.reactclaimsprojectserver.domain;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="claimstransactions")
@@ -11,35 +12,71 @@ public class ClaimTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="claimId")
+
+    @Column(name="claim_id")
     private String claimId;
+
     @Column(name="policyNumber")
     private String policyNumber;
+
+    @Column(name="first_name")
     private String firstName;
-    @Column(name="lastName")
+
+    @Column(name="last_name")
     private String lastName;
+
+    @Column(name="claim_date")
     private LocalDate claimDate;
+
+    @Column(name="claim_type")
     private String claimType;
-    @Column(name="claimStatus")
+
+    @Column(name="claim_status")
     private String claimStatus;
+
+    @Column(name="cost_of_claim")
     private String costOfClaim;
+
+    @Column(name="claim_reason")
     private String claimReason;
+
+    @Column(name="description")
     private String description;
+
+    @Column(name="city")
     private String city;
+
+    @Column(name="street")
     private String street;
+
+    @Column(name="zip")
     private String zip;
+
+    @Column(name="make_of_vehicle")
     private String makeOfVehicle;
+
+    @Column(name="model_of_vehicle")
     private String modelOfVehicle;
+
+    @Column(name="year_of_vehicle")
     private String yearOfVehicle;
+
+    @Column(name="pet_type")
     private String petType;
+
+    @Column(name="pet_breed")
     private String petBreed;
-    private Date dateOfEvent;
+
+    @Column(name="date_of_event")
+    private LocalDate dateOfEvent;
+
+    @Column(name="event_details")
     private String eventDetails;
 
     public ClaimTransaction() {
     }
 
-    public ClaimTransaction(Integer id, String claimId, String policyNumber, String firstName, String lastName, LocalDate claimDate,  String claimType, String claimStatus, String costOfClaim, String claimReason, String description, String city, String street, String zip, String makeOfVehicle, String modelOfVehicle, String yearOfVehicle, String petType, String petBreed, Date dateOfEvent, String eventDetails) {
+    public ClaimTransaction(Integer id, String claimId, String policyNumber, String firstName, String lastName, LocalDate claimDate,  String claimType, String claimStatus, String costOfClaim, String claimReason, String description, String city, String street, String zip, String makeOfVehicle, String modelOfVehicle, String yearOfVehicle, String petType, String petBreed, LocalDate dateOfEvent, String eventDetails) {
         this.id = id;
         this.claimId = claimId;
         this.policyNumber = policyNumber;
@@ -79,9 +116,7 @@ public class ClaimTransaction {
         this.claimId = claimId;
     }
 
-    public String getPolicyNumber() {
-        return policyNumber;
-    }
+    public String getPolicyNumber() { return policyNumber; }
 
     public void setPolicyNumber(String policyNumber) {
         this.policyNumber = policyNumber;
@@ -215,11 +250,11 @@ public class ClaimTransaction {
         this.petBreed = petBreed;
     }
 
-    public Date getDateOfEvent() {
+    public LocalDate getDateOfEvent() {
         return dateOfEvent;
     }
 
-    public void setDateOfEvent(Date dateOfEvent) {
+    public void setDateOfEvent(LocalDate dateOfEvent) {
         this.dateOfEvent = dateOfEvent;
     }
 
@@ -230,7 +265,6 @@ public class ClaimTransaction {
     public void setEventDetails(String eventDetails) {
         this.eventDetails = eventDetails;
     }
-
 
     @Override
     public String toString() {

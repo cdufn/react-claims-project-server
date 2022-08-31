@@ -17,7 +17,6 @@ import java.util.Map;
 
 public class ClaimController {
 
-
     ClaimService claimService;
 
     @Autowired
@@ -25,41 +24,39 @@ public class ClaimController {
         this.claimService = claimService;
     }
 
+    // get all the claim
     @GetMapping()
-    public List<ClaimTransaction> getAll(@RequestParam(value="policyNumber", required=false) String policyNumber,
-                                         @RequestParam(value="lastName", required=false) String lastName,
-                                         @RequestParam(value="claimStatus", required=false) String claimStatus) {
-        if (policyNumber != null) {
-            return claimService.getClaimByPolicyNumber(policyNumber);
+    public List<ClaimTransaction> getAll(@RequestParam(value="claimStatus", required=false) String claimStatus) {
+        if (claimStatus != null) {
+            return claimService.findByClaimStatus(claimStatus);
         }
-        else if (lastName != null) {
-            return claimService.getClaimByLastname(lastName);
-        }
-        else if (claimStatus != null) {
-            return claimService.getAllNewClaims(claimStatus);
-        }
-
         return claimService.getAllTransactions();
-
     }
 
+    // doesnt work
     @GetMapping(value ="/{id}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ClaimTransaction getById(@PathVariable("id") Integer id) {
-        return claimService.getClaimById(id);
+
+        return claimService.getTransactionById(id);
+    }
+
+
+    @GetMapping(value ="/{claimStatus}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public List<ClaimTransaction> getByClaimStatus(@PathVariable("claimStatus") String claimStatus) {
+        return claimService.findByClaimStatus(claimStatus);
     }
 
     @GetMapping("/volume")
-    public Map<String, String> getNumberOfPayments() {
+    public Map<String, String> getNumberOfClaims() {
         Integer volume = claimService.countTransactions();
         Map<String, String> results = new HashMap<>();
         results.put("volume", volume.toString());
         return results;
     }
 
-
     @PostMapping
     public ClaimTransaction addClaim(@RequestBody ClaimControllerDTO newTransaction) {
-        return claimService.addClaim(newTransaction);
+        return claimService.add(newTransaction);
     }
 
     @PutMapping("/{id}")

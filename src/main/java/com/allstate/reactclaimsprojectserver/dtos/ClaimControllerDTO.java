@@ -8,26 +8,26 @@ import java.util.Date;
 
 public class ClaimControllerDTO {
 
-    private String claimId;
-    private String policyNumber;
-    private String firstName;
-    private String lastName;
-    private LocalDate claimDate;
-    private String claimType;
-    private String claimStatus;
-    private String costOfClaim;
-    private String claimReason;
-    private String description;
-    private String city;
-    private String street;
-    private String zip;
-    private String makeOfVehicle;
-    private String modelOfVehicle;
-    private String yearOfVehicle;
-    private String petType;
-    private String petBreed;
-    private Date dateOfEvent;
-    private String eventDetails;
+     String claimId;
+     String policyNumber;
+     String firstName;
+     String lastName;
+     LocalDate claimDate;
+     String claimType;
+     String claimStatus;
+     String costOfClaim;
+     String claimReason;
+     String description;
+     String city;
+     String street;
+     String zip;
+     String makeOfVehicle;
+     String modelOfVehicle;
+     String yearOfVehicle;
+     String petType;
+     String petBreed;
+     LocalDate dateOfEvent;
+     String eventDetails;
 
     public ClaimControllerDTO() {
     }
@@ -37,9 +37,9 @@ public class ClaimControllerDTO {
         this.policyNumber = claimTable.getPolicyNumber();
         this.firstName = claimTable.getFirstName();
         this.lastName = claimTable.getLastName();
+        this.claimDate = claimTable.getClaimDate();
         this.claimType = claimTable.getClaimType();
         this.claimStatus = claimTable.getClaimStatus();
-        this.claimDate = claimTable.getClaimDate();
         this.costOfClaim = claimTable.getCostOfClaim();
         this.claimReason = claimTable.getClaimReason();
         this.description = claimTable.getDescription();
@@ -56,16 +56,10 @@ public class ClaimControllerDTO {
     }
     public ClaimTransaction toClaimTransaction() {
 
-        ClaimTransaction claimTable = new ClaimTransaction(null, claimId, policyNumber, firstName,
-                lastName, claimDate, claimType, claimStatus, costOfClaim, claimReason, description,city,
+        return new ClaimTransaction (null, claimId, policyNumber, firstName,
+                lastName, claimDate, claimType, claimStatus, costOfClaim, claimReason, description, city,
                 street, zip, makeOfVehicle, modelOfVehicle, yearOfVehicle, petType, petBreed, dateOfEvent,
                 eventDetails);
-        /*if (claimStatus.toLowerCase().equals("New")) {
-            claimTable.setClaimStatus("Accepted");
-
-        }*/
-
-        return claimTable;
     }
 
     public String getClaimId() {
@@ -212,11 +206,11 @@ public class ClaimControllerDTO {
         this.petBreed = petBreed;
     }
 
-    public Date getDateOfEvent() {
+    public LocalDate getDateOfEvent() {
         return dateOfEvent;
     }
 
-    public void setDateOfEvent(Date dateOfEvent) {
+    public void setDateOfEvent(LocalDate dateOfEvent) {
         this.dateOfEvent = dateOfEvent;
     }
 
