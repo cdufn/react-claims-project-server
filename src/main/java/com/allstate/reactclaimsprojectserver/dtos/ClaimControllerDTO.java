@@ -8,6 +8,8 @@ import java.util.Date;
 
 public class ClaimControllerDTO {
 
+     Integer id;
+
      String claimId;
      String policyNumber;
      String firstName;
@@ -60,6 +62,14 @@ public class ClaimControllerDTO {
                 lastName, claimDate, claimType, claimStatus, costOfClaim, claimReason, description, city,
                 street, zip, makeOfVehicle, modelOfVehicle, yearOfVehicle, petType, petBreed, dateOfEvent,
                 eventDetails);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getClaimId() {

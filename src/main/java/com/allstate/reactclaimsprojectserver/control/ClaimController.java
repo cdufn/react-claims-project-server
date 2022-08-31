@@ -33,11 +33,10 @@ public class ClaimController {
         return claimService.getAllTransactions();
     }
 
-    // doesnt work
-    @GetMapping(value ="/{id}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public ClaimTransaction getById(@PathVariable("id") Integer id) {
-
-        return claimService.getTransactionById(id);
+    // had to add in id/
+    @GetMapping(value="id/{id}",  produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ClaimTransaction getById(@PathVariable Integer id) {
+        return claimService.getById(id);
     }
 
 

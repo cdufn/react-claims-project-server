@@ -40,6 +40,16 @@ public class ClaimServiceImpl implements ClaimService {
         return ClaimRepository.findByClaimStatus(claimStatus);
     }
 
+    public ClaimTransaction getById(int id) {
+        Optional<ClaimTransaction> ccTrans = ClaimRepository.findById(id);
+        if (ccTrans.isPresent()) {
+            return ccTrans.get();
+        }
+        else {
+            return null;
+        }
+    }
+
     @Override
     public ClaimTransaction getTransactionById(Integer id) {
         Optional<ClaimTransaction> optionalCCT =  ClaimRepository.findById(id);

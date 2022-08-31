@@ -12,7 +12,7 @@ public interface ClaimService {
     List<ClaimTransaction> getAllTransactions();
     int countTransactions();
     List<ClaimTransaction> findByClaimStatus(String claimStatus);
-
+    public ClaimTransaction getById(int id);
     ClaimTransaction getTransactionById(Integer id);
     ClaimTransaction add(ClaimControllerDTO claim);
     ClaimTransaction updateClaim(Integer id, Map<String,String> data);

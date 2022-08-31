@@ -16,7 +16,7 @@ public class ClaimTransaction {
     @Column(name="claim_id")
     private String claimId;
 
-    @Column(name="policyNumber")
+    @Column(name="policy_number")
     private String policyNumber;
 
     @Column(name="first_name")
@@ -266,7 +266,7 @@ public class ClaimTransaction {
         this.eventDetails = eventDetails;
     }
 
-    @Override
+  /*  @Override
     public String toString() {
         return "ClaimTransaction{" +
                 "id=" + id +
@@ -290,6 +290,6 @@ public class ClaimTransaction {
                 ", petBreed=" + petBreed + '\'' +
                 ", dateOfEvent='" + dateOfEvent + '\'' +
                 ", eventDetails=" + eventDetails + '\'' +
-                '}';
-    }
+                '}';*/
+    //}
 }
