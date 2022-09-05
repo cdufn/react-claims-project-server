@@ -15,5 +15,5 @@ public interface ClaimService {
     public ClaimTransaction getById(int id);
     ClaimTransaction getTransactionById(Integer id);
     ClaimTransaction add(ClaimControllerDTO claim);
-    ClaimTransaction updateClaim(Integer id, Map<String,String> data);
+    ClaimTransaction updateClaim(Integer claimId, Map<String, String> data);
 }

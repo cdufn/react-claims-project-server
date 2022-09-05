@@ -4,14 +4,12 @@ import com.allstate.reactclaimsprojectserver.data.ClaimRepository;
 import com.allstate.reactclaimsprojectserver.domain.ClaimTransaction;
 import com.allstate.reactclaimsprojectserver.dtos.ClaimControllerDTO;
 import com.allstate.reactclaimsprojectserver.exceptions.InvalidNewTransactionException;
+import com.allstate.reactclaimsprojectserver.exceptions.TransactionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Date;
+import java.util.*;
 
 @Service
 public class ClaimServiceImpl implements ClaimService {
@@ -77,25 +75,58 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
     @Override
-    public ClaimTransaction updateClaim(Integer id, Map<String, String> data) {
-        ClaimTransaction claim = getTransactionById(id);
-        if (data.containsKey("policyNumber")) claim.setPolicyNumber(data.get("policyNumber"));
-        if (data.containsKey("firstName")) claim.setFirstName(data.get("firstName"));
-        if (data.containsKey("lastName")) claim.setLastName(data.get("lastName"));
-        if (data.containsKey("claimType")) claim.setClaimType(data.get("claimType"));
-        if (data.containsKey("claimStatus")) claim.setClaimStatus(data.get("claimStatus"));
-        if (data.containsKey("claimDate")) claim.setClaimDate(LocalDate.parse(data.get("claimDate")));
-        if (data.containsKey("costOfClaim")) claim.setCostOfClaim(data.get("costOfClaim"));
-        if (data.containsKey("claimReason")) claim.setClaimReason(data.get("claimReason"));
-        if (data.containsKey("street")) claim.setStreet(data.get("street"));
-        if (data.containsKey("zip")) claim.setZip(data.get("zip"));
-        if (data.containsKey("makeOfVehicle")) claim.setMakeOfVehicle(data.get("makeOfVehicle"));
-        if (data.containsKey("modelOfVehicle")) claim.setModelOfVehicle(data.get("modelOfVehicle"));
-        if (data.containsKey("yearOfVehicle;")) claim.setYearOfVehicle(data.get("yearOfVehicle;"));
-        if (data.containsKey("petType")) claim.setPetType(data.get("petType"));
-        if (data.containsKey("petBreed")) claim.setPetBreed(data.get("petBreed"));
-        if (data.containsKey("dateOfEvent")) claim.setDateOfEvent(LocalDate.parse(data.get("dateOfEvent")));
-        if (data.containsKey("eventDetails")) claim.setEventDetails(data.get("eventDetails"));
-        return ClaimRepository.save(claim);
+    public ClaimTransaction updateClaim(Integer claimId, Map<String, String> data) {
+        ArrayList<String> validValues = new ArrayList<>(Arrays.asList("New", "Assessed", "closed", "Rejected"));
+
+        ClaimTransaction clmUpdate = getById(claimId);
+
+        if(data.containsKey("claimStatus") && data.get("claimStatus") != null
+                && validValues.contains(data.get("claimStatus").toLowerCase())) {
+            clmUpdate.setClaimStatus(data.get("claimStatus"));
+        }else if(data.containsKey("claimStatus") && data.get("claimStatus") != null){
+            throw new TransactionNotFoundException("Claim status invalid: ("
+                    + data.get("claimStatus")
+                    + ") valid values are: "
+                    + validValues.toString());
+        }
+
+        if(data.containsKey("claimId")){
+
+                clmUpdate.setClaimId(data.get("claimId"));
+
+        }
+
+        if(data.containsKey("policyNumber")){
+
+            clmUpdate.setPolicyNumber(data.get("policyNumber"));
+
+        }
+
+        if(data.containsKey("firstName")){
+
+                clmUpdate.setFirstName(data.get("firstName"));
+
+        }
+
+        if(data.containsKey("lastName")){
+
+                clmUpdate.setLastName(data.get("lastName"));
+
+        }
+
+        if(data.containsKey("costOfClaim")){
+
+                clmUpdate.setCostOfClaim(data.get("costOfClaim"));
+
+        }
+
+        if(data.containsKey("claimStatus")){
+
+                clmUpdate.setClaimStatus(data.get("claimStatus"));
+
+        }
+
+        return ClaimRepository.save(clmUpdate);
     }
+
 }

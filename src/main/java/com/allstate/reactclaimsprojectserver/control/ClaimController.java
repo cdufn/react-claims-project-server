@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class ClaimController {
 
+    // add in business logic to not return entries when a claim is rejected or accepted and paid
+
     ClaimService claimService;
 
     @Autowired
@@ -58,10 +60,9 @@ public class ClaimController {
         return claimService.add(newTransaction);
     }
 
-    @PutMapping("/{id}")
-    public ClaimTransaction updateClaim(@PathVariable("id") Integer id,
-                                                   @RequestBody Map<String, String> data) {
-
-        return claimService.updateClaim(id, data);
+    @PutMapping("/update/{id}")
+    public ClaimTransaction updateClaim(@PathVariable("id") Integer claimId,
+                             @RequestBody Map<String, String> data){
+        return claimService.updateClaim(claimId, data);
     }
 }
