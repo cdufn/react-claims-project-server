@@ -16,9 +16,6 @@ import java.util.Map;
 @RequestMapping("/api/claim")
 
 public class ClaimController {
-
-    // add in business logic to not return entries when a claim is rejected or accepted and paid
-
     ClaimService claimService;
 
     @Autowired
@@ -45,14 +42,6 @@ public class ClaimController {
     @GetMapping(value ="/{claimStatus}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public List<ClaimTransaction> getByClaimStatus(@PathVariable("claimStatus") String claimStatus) {
         return claimService.findByClaimStatus(claimStatus);
-    }
-
-    @GetMapping("/volume")
-    public Map<String, String> getNumberOfClaims() {
-        Integer volume = claimService.countTransactions();
-        Map<String, String> results = new HashMap<>();
-        results.put("volume", volume.toString());
-        return results;
     }
 
     @PostMapping

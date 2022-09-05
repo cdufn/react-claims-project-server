@@ -76,18 +76,23 @@ public class ClaimServiceImpl implements ClaimService {
 
     @Override
     public ClaimTransaction updateClaim(Integer claimId, Map<String, String> data) {
-        ArrayList<String> validValues = new ArrayList<>(Arrays.asList("New", "Assessed", "closed", "Rejected"));
+        ArrayList<String> validValues = new ArrayList<>(Arrays.asList("New", "Assessed", "Rejected", "Accepted Paid", "Accepted Await", "Transfer"));
 
         ClaimTransaction clmUpdate = getById(claimId);
 
+        System.out.println("Are we need the update claim section " + clmUpdate);
+
         if(data.containsKey("claimStatus") && data.get("claimStatus") != null
-                && validValues.contains(data.get("claimStatus").toLowerCase())) {
+                && validValues.contains(data.get("claimStatus"))) {
             clmUpdate.setClaimStatus(data.get("claimStatus"));
+
         }else if(data.containsKey("claimStatus") && data.get("claimStatus") != null){
             throw new TransactionNotFoundException("Claim status invalid: ("
                     + data.get("claimStatus")
                     + ") valid values are: "
                     + validValues.toString());
+
+
         }
 
         if(data.containsKey("claimId")){
@@ -126,7 +131,70 @@ public class ClaimServiceImpl implements ClaimService {
 
         }
 
-        return ClaimRepository.save(clmUpdate);
+        ClaimTransaction result =  ClaimRepository.save(clmUpdate);
+        System.out.println("returning " + result);
+        return result;
+    }
+
+    // update new claim
+    @Override
+    public ClaimTransaction updateNewClaim(Integer id, Map<String, String> data) {
+        ArrayList<String> validValues = new ArrayList<>(Arrays.asList("Assessed", "Rejected", "Accepted Paid", "Accept", "Transfer"));
+
+        ClaimTransaction clmUpdate = getById(id);
+
+        if(data.containsKey("claimStatus") && data.get("claimStatus") != null
+                && validValues.contains(data.get("claimStatus"))) {
+            clmUpdate.setClaimStatus(data.get("claimStatus"));
+
+        }else if(data.containsKey("claimStatus") && data.get("claimStatus") != null){
+            throw new TransactionNotFoundException("Claim status invalid: ("
+                    + data.get("claimStatus")
+                    + ") valid values are: "
+                    + validValues.toString());
+
+
+        }
+
+        if(data.containsKey("claimId")){
+
+            clmUpdate.setClaimId(data.get("claimId"));
+
+        }
+
+        if(data.containsKey("policyNumber")){
+
+            clmUpdate.setPolicyNumber(data.get("policyNumber"));
+
+        }
+
+        if(data.containsKey("firstName")){
+
+            clmUpdate.setFirstName(data.get("firstName"));
+
+        }
+
+        if(data.containsKey("lastName")){
+
+            clmUpdate.setLastName(data.get("lastName"));
+
+        }
+
+        if(data.containsKey("costOfClaim")){
+
+            clmUpdate.setCostOfClaim(data.get("costOfClaim"));
+
+        }
+
+        if(data.containsKey("claimStatus")){
+
+            clmUpdate.setClaimStatus(data.get("claimStatus"));
+
+        }
+
+        ClaimTransaction result =  ClaimRepository.save(clmUpdate);
+        System.out.println("returning " + result);
+        return result;
     }
 
 }

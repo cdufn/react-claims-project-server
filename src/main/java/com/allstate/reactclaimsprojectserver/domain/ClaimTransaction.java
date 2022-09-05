@@ -266,30 +266,5 @@ public class ClaimTransaction {
         this.eventDetails = eventDetails;
     }
 
-  /*  @Override
-    public String toString() {
-        return "ClaimTransaction{" +
-                "id=" + id +
-                ", claimId=" + claimId + '\'' +
-                ", policyNumber='" + policyNumber + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName=" + lastName + '\'' +
-                ", claimDate=" + claimDate +
-                ", claimType='" + claimType + '\'' +
-                ", claimStatus=" + claimStatus + '\'' +
-                ", costOfClaim=" + costOfClaim + '\'' +
-                ", claimReason=" + claimReason + '\'' +
-                ", description=" + description + '\'' +
-                ", city='" + city + '\'' +
-                ", street=" + street + '\'' +
-                ", zip=" + zip + '\'' +
-                ", makeOfVehicle=" + makeOfVehicle + '\'' +
-                ", modelOfVehicle=" + modelOfVehicle + '\'' +
-                ", yearOfVehicle=" + yearOfVehicle + '\'' +
-                ", petType=" + petType + '\'' +
-                ", petBreed=" + petBreed + '\'' +
-                ", dateOfEvent='" + dateOfEvent + '\'' +
-                ", eventDetails=" + eventDetails + '\'' +
-                '}';*/
-    //}
+
 }
