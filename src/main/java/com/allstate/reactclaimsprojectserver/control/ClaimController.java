@@ -49,7 +49,7 @@ public class ClaimController {
         return claimService.add(newTransaction);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ClaimTransaction updateClaim(@PathVariable("id") Integer claimId,
                              @RequestBody Map<String, String> data){
         return claimService.updateClaim(claimId, data);

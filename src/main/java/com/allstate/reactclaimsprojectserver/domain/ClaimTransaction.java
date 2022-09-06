@@ -2,8 +2,7 @@ package com.allstate.reactclaimsprojectserver.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="claimstransactions")
@@ -266,5 +265,9 @@ public class ClaimTransaction {
         this.eventDetails = eventDetails;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 }
